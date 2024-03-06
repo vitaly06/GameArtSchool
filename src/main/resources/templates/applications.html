@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="htttp://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Заявки</title>
+    <link rel="stylesheet" href="css/applications.css">
+    <link rel="icon" href="imgs/logo.svg">
+</head>
+<body>
+    <div class="panel">
+        <div class="header">
+            <div class="btn1"><a href="/adminpanel">Панель админа</a></div>
+        </div>
+        <div class="right-side">
+            <form th:method="POST" th:action="@{/addStudents}" th:object="${student}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Номер</th>
+                        <th>Статус обработки</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="person : ${applications}">
+                        <input type="hidden" th:attr="name='name'" th:value="${person.getName}" />
+                        <input type="hidden" th:attr="name='number'" th:value="${person.getNumber}" />
+                        <td><span th:text="${person.getName}">ФИО</span></td>
+                        <td><span th:text="${person.getNumber}">Номер</span></td>
+                        <td><select name="status" id="">
+                            <option value="no">нет</option>
+                            <option value="yes">да</option>
+                            <option value="stop">отказ</option>
+                        </select></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button class="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
